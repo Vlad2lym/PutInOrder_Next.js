@@ -1,4 +1,3 @@
-import Image from 'next/image'
 import Link from 'next/link'
 import React, { useState } from 'react'
 import MainLayout from '../components/layouts/mainLayout'
@@ -7,7 +6,6 @@ import InputRangeSetting from '../components/settings/inputRangeSetting'
 import MyButton from '../components/UI/myButton'
 import { useAppDispatch, useAppSelector } from '../hooks/redux'
 import { settingsSlice } from '../store/settingsSlice'
-import styles from '../styles/Home.module.scss'
 
 
 export default function Home() {

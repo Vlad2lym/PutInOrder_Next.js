@@ -1,9 +1,8 @@
 import Link from "next/link";
-import { FC, useEffect, useMemo, useState } from "react";
+import React, { FC, useMemo, useState } from "react";
 import MainLayout from "../components/layouts/mainLayout";
 import { useAppSelector } from "../hooks/redux";
 import styles from '../styles/Home.module.scss'
-
 
 interface GameProps {
 
@@ -11,6 +10,7 @@ interface GameProps {
 
 const Game:FC<GameProps> = () => {
     const {numberItems, valueItems, ascending} = useAppSelector(state => state.setting)
+    const [draggableItem, setDraggableItem] = useState<string | number>()
 
     const itemsOfGame: number[] | string[] = useMemo(()=> {
         let min: number,
@@ -61,19 +61,40 @@ const Game:FC<GameProps> = () => {
         valueItems === 0 ? [...itemsOfGame].sort() : [...itemsOfGame].sort((a, b) => +a - +b)
         :
         valueItems === 0 ? [...itemsOfGame].sort().reverse() : [...itemsOfGame].sort((a, b) => +b - +a)
+
+    const dragStartHandler = (e:React.DragEvent<HTMLDivElement>, item:string | number) => {
+        setDraggableItem(item);
+        (e.target as HTMLDivElement).style.cursor = 'grab';
+    }
+
+    const dropHandler = (e:React.DragEvent, item:string | number) => {
+        e.preventDefault()
+        draggableItem === item ? alert('true') : alert('false')
+    }
     
     return (
     <MainLayout>
-        <Link href='/'><h2 style={{margin: '0px auto', textAlign: 'end'}}>Back to settings</h2></Link>
-        <div className="gameArea">
-            <div style={{display: 'flex', justifyContent: 'center'}}>
-            {sortedItemsOfGame.map(item => {
-                    return <div draggable className={styles.circle} style={{backgroundColor: 'green'}} >{item}</div>
+        <div className={styles.gameArea}>
+            <div style={{display: 'flex', justifyContent: 'end'}}><Link href='/'><h2 style={{margin: '0px'}}>Back to settings</h2></Link></div>
+            <div style={{display: 'flex', justifyContent: 'center', alignItems: 'center', flex: '1 1 auto'}}>
+                {itemsOfGame.map(item => {
+                    return <div 
+                        draggable
+                        onDragStart={e => dragStartHandler(e, item)}
+                        className={styles.circle}
+                        >{item}
+                    </div>
                 })}
             </div>
-            <div style={{display: 'flex', justifyContent: 'center'}}>
-                {itemsOfGame.map(item => {
-                    return <div draggable className={styles.circle}>{item}</div>
+            <div className={styles.sortedItemsOfGame}>
+                {sortedItemsOfGame.map(item => {
+                    return <div 
+                        onDragOver={e => e.preventDefault()}
+                        onDrop={e => dropHandler(e, item)}
+                        className={styles.circle} 
+                        style={{backgroundColor: 'green', cursor: 'default'}}
+                        >{item}
+                    </div>
                 })}
             </div>
         </div>
