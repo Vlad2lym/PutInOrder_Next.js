@@ -6,22 +6,20 @@ width: 250px;
 border: none;
 border-radius: 18px;
 font-size: 1.75rem;
-
 ${props => props.active && css`
     height: 49px;
     background-color: ${props => props.theme.colors.myYellow};
     box-shadow: 5px 7px 8px #a2d3da;
 `}
-
 ${props => props.inactive && css`
     hright: 41px;
     background-color: #c5b47b;
-        &:hover {
+    &:hover {
         border: 4px solid ${props => props.theme.colors.myYellow};
         height: 49px;
         box-shadow: 5px 7px 8px #a2d3da;
         cursor: pointer;
-        }
+    }
 `}
 ${props => props.primary && css`
     margin: 40px 145px 20px;
@@ -32,14 +30,14 @@ ${props => props.primary && css`
     border-radius: 18px;
     font-size: 1.75rem;
     cursor: pointer;
-        &:hover {
+    &:hover {
         border: 4px solid ${props => props.theme.colors.myYellow};
         box-shadow: 5px 7px 8px #a2d3da;
-        }
+    }
 `}
 `
 interface MyButtonProps {
-    children: string
+    children: string,
     active?: boolean,
     inactive?: boolean,
     primary?: boolean,

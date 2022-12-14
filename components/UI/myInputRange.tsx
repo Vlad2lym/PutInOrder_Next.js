@@ -4,6 +4,7 @@ import styled from "styled-components";
 const StyledInput = styled.input`
 align-self: center;
 -webkit-appearance: none;
+-moz-appearance: none;
 width: 500px;
 height: 8px;
 background: rgba(162, 211, 218, 0.6);
@@ -27,6 +28,19 @@ cursor: pointer;
   box-shadow: 0 0 2px 0 #555;
   transition: background .3s ease-in-out;
 }
+&::-moz-range-track {
+  box-shadow: none;
+  border: none;
+  background: transparent;
+}
+&::-moz-range-thumb {
+  height: 20px;
+  width: 20px;
+  border-radius: 50%;
+  background: ${props => props.color || props.theme.colors.myYellow};
+  box-shadow: 0 0 2px 0 #555;
+  transition: background .3s ease-in-out;
+}
 `
 interface MyInputRangeProps {
     min: string,
@@ -38,7 +52,8 @@ interface MyInputRangeProps {
 
 const MyInputRange:FC<MyInputRangeProps> = ({min, max, value, onChange, ...props}) => {
     return <StyledInput 
-        type="range" value={value} 
+        type="range" 
+        value={value} 
         onChange={(e) => onChange(e)} 
         min={min} 
         max={max} 

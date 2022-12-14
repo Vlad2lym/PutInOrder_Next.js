@@ -18,7 +18,7 @@ interface BoxProps {
 }
 
 const Box:FC<BoxProps> = (props) => {
-    return <StyledBox {...props} />
+    return <StyledBox {...props}/>
 }
 
 export default Box;

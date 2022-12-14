@@ -15,7 +15,7 @@ interface TitleProps {
 }
 
 const  Title:FC<TitleProps> = (props) => {
-    return <StyledTitle {...props} />
+    return <StyledTitle {...props}/>
 }
 
 export default Title;

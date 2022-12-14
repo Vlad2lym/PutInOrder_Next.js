@@ -1,5 +1,5 @@
 import Link from 'next/link'
-import React, { useState } from 'react'
+import React from 'react'
 import MainLayout from '../components/layouts/mainLayout'
 import ButtonSetting from '../components/settings/buttonSetting'
 import InputRangeSetting from '../components/settings/inputRangeSetting'
@@ -43,7 +43,7 @@ export default function Home() {
         value={ascending}
         onClick={() => dispatch(setAscending())}
       />
-      <Link href='/game'><MyButton primary >START</MyButton></Link>
+      <Link href='/game' style={{display: 'contents'}}><MyButton primary>START</MyButton></Link>
     </MainLayout>
   )
 }
